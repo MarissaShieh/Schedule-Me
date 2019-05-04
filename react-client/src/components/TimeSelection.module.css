@@ -1,8 +1,7 @@
-.hourGroup {
-  font-weight: bold;
-  font-style: italic;
+.selected{
+
 }
 
-.selected {
-  background: red
+.unselected{
+  
 }

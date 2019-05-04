@@ -2,8 +2,12 @@ import React from 'react';
 import styles from './TimeSelection.module.css';
 
 function TimeSelection (props) {
+  const earlyMorning = [];
+  for (let time = 5; time <= 8; time++) {
+    addToTimeSet(earlyMorning, time);;
+  }
   const morning = [];
-  for (let time = 7; time < 12; time++) {
+  for (let time = 8; time < 12; time++) {
     addToTimeSet(morning, time);;
   }
   
@@ -18,42 +22,42 @@ function TimeSelection (props) {
   }
 
   const overnight = [];
-  for (let time = 23; time <= 24; time++) {
+  for (let time = 23; time < 24; time++) {
     addToTimeSet(overnight, time);;
   }
-  for (let time = 0; time < 7; time++) {
+  for (let time = 0; time < 5; time++) {
     addToTimeSet(overnight, time);;
   }
 
   function addToTimeSet(timeArray, time) {
     let hour;
-    const hourSet = [];
     if (time < 10) {
       hour = `0${time}`;
     } else {
       hour = `${time}`;
     }
-    hourSet.push(`${hour}:00`);
-    hourSet.push(`${hour}:15`);
-    hourSet.push(`${hour}:30`);
-    hourSet.push(`${hour}:40`);
-    timeArray.push(hourSet);
+    timeArray.push(`${hour}:00`);
+    timeArray.push(`${hour}:30`);
   }
 
   return (
     <div className={styles.selected}>
       <label htmlFor="timeSelection">Choose a time which works for Person {props.userNum}: </label>
       <select id="timeSelection"> 
-        <optgroup label="morning">
-          {morning.map( hourSet => hourSet.map((time, i) => {
-            let timeToDisplay;
-            if (i === 0) {
-              timeToDisplay = (<option value={time} className={styles.hourGroup}>{time}</option>);
-            } else {
-              timeToDisplay = (<option value={time} className="withinHour">{time}</option>);
-            }
-            return timeToDisplay;
-          }))}
+        <optgroup label="Early Morning">
+          {earlyMorning.map(time => <option value={time}>{time}</option>)}
+        </optgroup>      
+        <optgroup label="Morning">
+          {morning.map(time => <option value={time}>{time}</option>)}
+        </optgroup>
+        <optgroup label="Afternoon">
+          {afternoon.map(time => <option value={time}>{time}</option>)}
+        </optgroup>
+        <optgroup label="Evening">
+          {evening.map(time => <option value={time}>{time}</option>)}
+        </optgroup>
+        <optgroup label="Overnight">
+          {overnight.map(time => <option value={time}>{time}</option>)}
         </optgroup>
       </select>
     </div>
