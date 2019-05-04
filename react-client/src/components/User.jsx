@@ -1,9 +1,10 @@
 import React from 'react';
+import timezoneDropdown from './TimezoneDropdown.jsx';
 
 const User = function(props){
   return (
-    <div>
-      hello: {props.userNum}
+    <div className={`user user${props.userNum}`}>
+      <timezoneDropdown />
     </div>
   )
 }
