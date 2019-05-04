@@ -16,7 +16,7 @@ class App extends React.Component {
     const users = [];
     let usersLeftToRender = this.state.users;
     while (usersLeftToRender > 0) {
-      users.push(<User key={usersLeftToRender} userNum={usersLeftToRender}/>);
+      users.unshift(<User key={usersLeftToRender} userNum={usersLeftToRender}/>);
       usersLeftToRender -= 1;
     }
 
