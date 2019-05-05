@@ -25,16 +25,9 @@ class App extends React.Component {
   }
 
   render () {
-    const users = [];
-    let usersLeftToRender = this.state.users.length;
-    while (usersLeftToRender > 0) {
-      users.unshift(<User key={usersLeftToRender} userNum={usersLeftToRender} selectedTime1={this.state.selectedTime1} selectedTime2={this.state.selectedTime2}/>);
-      usersLeftToRender -= 1;
-    }
-
     return (
       <div>
-        {users}
+        {this.state.users.map(user => <User key={user.toString()} userNum={user.toString()} selectedTime1={this.state.selectedTime1} selectedTime2={this.state.selectedTime2}/>)}
         <CalculatedTime users={this.state.users} timezone1={this.state.timezone1} timezone2={this.state.timezone2} selectedTime1={this.state.selectedTime1} selectedTime2={this.state.selectedTime2}/>
       </div>
     );
