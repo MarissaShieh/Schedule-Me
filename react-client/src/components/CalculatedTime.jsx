@@ -5,7 +5,7 @@ function CalculatedTime (props) {
   return (
     <div>
       <h4>Time Converted:</h4>
-      {props.users.map(user => <CalcTimePerPerson />)}
+      {props.users.map(user => <CalcTimePerPerson key={user.toString()}/>)}
     </div>
   );
 }

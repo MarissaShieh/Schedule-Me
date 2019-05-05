@@ -45,19 +45,19 @@ function TimeSelection (props) {
       <label htmlFor="timeSelection">Choose a time which works for Person {props.userNum}: </label>
       <select id="timeSelection"> 
         <optgroup label="Early Morning">
-          {earlyMorning.map(time => <option value={time}>{time}</option>)}
+          {earlyMorning.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>      
         <optgroup label="Morning">
-          {morning.map(time => <option value={time}>{time}</option>)}
+          {morning.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>
         <optgroup label="Afternoon">
-          {afternoon.map(time => <option value={time}>{time}</option>)}
+          {afternoon.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>
         <optgroup label="Evening">
-          {evening.map(time => <option value={time}>{time}</option>)}
+          {evening.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>
         <optgroup label="Overnight">
-          {overnight.map(time => <option value={time}>{time}</option>)}
+          {overnight.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>
       </select>
     </div>
