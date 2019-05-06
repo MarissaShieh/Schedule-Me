@@ -16,6 +16,7 @@ function CalculatedTime (props) {
   // let chosenTime = props.timezones[selectedUser];
   var timeDateInInputCountry = new Date().toLocaleString("en-US", {timeZone: props.timezones[selectedUser]});
   var inputCountryDate = timeDateInInputCountry.split(',')[0].split('/');
+  //format the dates so that it's ['MM', 'DD', 'YYYY']
   if (inputCountryDate[0].length === 1) {
     inputCountryDate[0] = `0${inputCountryDate[0]}`
   }
@@ -24,10 +25,9 @@ function CalculatedTime (props) {
   }
   const selectedHour = props.selectedTimes[selectedUser].substring(0,2);
   const selectedMinutes = props.selectedTimes[selectedUser].substring(3);
-  console.log(`TEST: ${inputCountryDate[2]}-${inputCountryDate[0]}-${inputCountryDate[1]} ${selectedHour}:${selectedMinutes}`);
 
   const inputUserTime = moment.tz(`${inputCountryDate[2]}-${inputCountryDate[0]}-${inputCountryDate[1]} ${selectedHour}:${selectedMinutes}`, props.timezones[selectedUser]);
-  console.log('HERE', inputUserTime.format('MMMM Do YYYY, H:mm:ss a'));
+  // console.log('HERE', inputUserTime.format('MMMM Do YYYY, H:mm a'));
   const calcOtherUserTime = inputUserTime.clone().tz(props.timezones[otherUser]);
 
   const calculatedTimes = [];
