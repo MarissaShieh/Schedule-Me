@@ -40,10 +40,14 @@ function TimeSelection (props) {
     timeArray.push(`${hour}:30`);
   }
 
+  function handleSelection(event){
+    props.selectTime(event.target.value, props.userNum);
+  }
+
   return (
     <div className={styles.selected}>
       <label htmlFor="timeSelection">Choose a time which works for Person {props.userNum}: </label>
-      <select id="timeSelection"> 
+      <select id="timeSelection" onChange={handleSelection}> 
         <optgroup label="Early Morning">
           {earlyMorning.map(time => <option key={time} value={time}>{time}</option>)}
         </optgroup>      
