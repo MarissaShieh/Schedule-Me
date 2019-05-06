@@ -14,15 +14,20 @@ function CalculatedTime (props) {
   }
 
   // let chosenTime = props.timezones[selectedUser];
-  let chosenTime = new Date();
-  chosenTime.toLocaleString("en-US", {timeZone: props.timezones[selectedUser]});
-  const selectedHour = Number(props.selectedTimes[selectedUser].substring(0,2));
+  var timeDateInInputCountry = new Date().toLocaleString("en-US", {timeZone: props.timezones[selectedUser]});
+  var inputCountryDate = timeDateInInputCountry.split(',')[0].split('/');
+  if (inputCountryDate[0].length === 1) {
+    inputCountryDate[0] = `0${inputCountryDate[0]}`
+  }
+  if (inputCountryDate[1].length === 1) {
+    inputCountryDate[1] = `0${inputCountryDate[1]}`
+  }
+  const selectedHour = props.selectedTimes[selectedUser].substring(0,2);
   const selectedMinutes = props.selectedTimes[selectedUser].substring(3);
-  chosenTime.setHours(selectedHour, selectedMinutes);
-  const inputISO = chosenTime.toISOString();
-  console.log('chosenTime', chosenTime);
+  console.log(`TEST: ${inputCountryDate[2]}-${inputCountryDate[0]}-${inputCountryDate[1]} ${selectedHour}:${selectedMinutes}`);
 
-  const inputUserTime = moment.tz(moment(inputISO), props.timezones[selectedUser]);
+  const inputUserTime = moment.tz(`${inputCountryDate[2]}-${inputCountryDate[0]}-${inputCountryDate[1]} ${selectedHour}:${selectedMinutes}`, props.timezones[selectedUser]);
+  console.log('HERE', inputUserTime.format('MMMM Do YYYY, H:mm:ss a'));
   const calcOtherUserTime = inputUserTime.clone().tz(props.timezones[otherUser]);
 
   const calculatedTimes = [];
@@ -38,8 +43,8 @@ function CalculatedTime (props) {
   return (
     <div>
       <h4>Time Converted:</h4>
-      <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} selectedUser={selectedUser} time={calculatedTimes[0].format()}/>
-      <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} selectedUser={selectedUser} time={calculatedTimes[1].format()}/>
+      <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} selectedUser={selectedUser} time={calculatedTimes[0].format('ha z')}/>
+      <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} selectedUser={selectedUser} time={calculatedTimes[1].format('ha z')}/>
     </div>
   );
 }

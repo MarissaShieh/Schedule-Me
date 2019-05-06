@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = { 
       users: [1,2],
       timezone1: 'Africa/Cairo',
-      timezone2: 'Europe/Minsk',
+      timezone2: 'America/Los_Angeles',
       selectedTime1: '01:00',
       selectedTime2: ''
     }
