@@ -43,8 +43,8 @@ function CalculatedTime (props) {
   return (
     <div>
       <h4>Time Converted:</h4>
-      <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} selectedUser={selectedUser} time={calculatedTimes[0].format('ha z')}/>
-      <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} selectedUser={selectedUser} time={calculatedTimes[1].format('ha z')}/>
+      <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} selectedUser={selectedUser} time={calculatedTimes[0].format('HH:mm A')}/>
+      <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} selectedUser={selectedUser} time={calculatedTimes[1].format('HH:mm A')}/>
     </div>
   );
 }
