@@ -1,20 +1,30 @@
 import React from 'react';
 import moment from 'moment';
+import $ from 'jquery';
 
 function SaveBtn(props) {
+  console.log(props);
 
   function saveToDatabase() {
-    console.log('clicked',props);
-    console.log('cookie', document.cookie);
     if (!document.cookie) {
-      console.log('making new cookie');
       var dateNow = new Date();
       var newDateObj = moment.utc(dateNow).add(1, 'm');
       var generatedUsername = `${Math.ceil(Math.random() * 100000) + Math.floor(Math.random() * 5000)}`
       document.cookie = `username=${generatedUsername};expires=${newDateObj}`
-    } else {
-      console.log('cookie exists');
     }
+    $.ajax({
+      type: 'POST',
+      url: '/searches',
+      data: {
+        cookieID: document.cookie,
+        timezones: props.timezones,
+        times: props.times
+      },
+      // contentType: 'application/json'
+    })
+      .done(() => console.log('saved to database'))
+      .fail(() => console.log('failed to save to database'))
+    
   }
 
   return (
