@@ -35,7 +35,6 @@ class TimeSelection extends React.Component {
 
   render() {
     const clockArr = this.make24HourClock();
-    console.log('in TimeSelection');
     return (
       <div className={styles.selected}>
         <label htmlFor="timeSelection">Choose a time which works for Person {this.props.userNum}: </label>

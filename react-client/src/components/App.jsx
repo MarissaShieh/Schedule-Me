@@ -20,9 +20,6 @@ class App extends React.Component {
     this.finalCalculations = this.finalCalculations.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   selectTimezone(timezone, userNum) {
     const whichTZ = `timezone${userNum}`;
     this.setState({
@@ -55,9 +52,6 @@ class App extends React.Component {
   }
 
   render () {
-    console.log('1 ',this.state.selectedTime1);
-    console.log('2 ', this.state.selectedTime2);
-
     return (
       <div>
         {this.state.users.map(user => <User key={user.toString()} selectTime={this.selectTime} selectTimezone={this.selectTimezone} userNum={user.toString()} selectedTime={this.state[`selectedTime${user}`]} timezone={this.state[`timezone${user}`]}/>)}
