@@ -4,16 +4,17 @@ import CalculatedTime from './CalculatedTime.jsx';
 import PastSearches from './PastSearches.jsx'
 import moment from 'moment';
 import $ from 'jquery';
+import styles from './App.module.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       users: [1,2],
-      timezone1: 'America/New_York',
-      timezone2: 'Asia/Taipei',
+      timezone1: 'Africa/Abidjan',
+      timezone2: 'Africa/Abidjan',
       selectedTime1: '',
-      selectedTime2: '02:00',
+      selectedTime2: '00:00',
       selectedNotCalculated: true,
       calculatedMoments: [moment(), moment()],
       pastSavedSearches: []
@@ -79,8 +80,12 @@ class App extends React.Component {
       pastSearches = <PastSearches pastSearches={this.state.pastSavedSearches}/>;
     }
     return (
-      <div>
-        {this.state.users.map(user => <User key={user.toString()} selectTime={this.selectTime} selectTimezone={this.selectTimezone} userNum={user.toString()} selectedTime={this.state[`selectedTime${user}`]} timezone={this.state[`timezone${user}`]}/>)}
+      <div className={styles.app}>
+        <h1>Time Zone Converter</h1>
+        <p><b>Directions: </b>Choose a time zone for <em>both</em> parties. Then choose a time which works for <em>one</em> person. The time zone converter will calculate the other person's time below.</p>
+        <div className={styles.users}>
+          {this.state.users.map(user => <User key={user.toString()} selectTime={this.selectTime} selectTimezone={this.selectTimezone} userNum={user.toString()} selectedTime={this.state[`selectedTime${user}`]} timezone={this.state[`timezone${user}`]}/>)}
+        </div>
         <CalculatedTime users={this.state.users} timezones={[this.state.timezone1, this.state.timezone2]} selectedTimes={[this.state.selectedTime1, this.state.selectedTime2]} notCalculatedYet={this.state.selectedNotCalculated} finalCalculations={this.finalCalculations} calculatedMoments={this.state.calculatedMoments}/>
         {pastSearches}
       </div>

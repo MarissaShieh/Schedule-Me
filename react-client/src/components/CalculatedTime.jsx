@@ -2,6 +2,7 @@ import React from 'react';
 import DisplayCalcTime1 from './DisplayCalcTime1.jsx'
 import moment from 'moment-timezone';
 import SaveBtn from './SaveBtn.jsx';
+import styles from './CalculatedTime.module.css';
 
 class CalculatedTime extends React.Component {
   constructor(props) {
@@ -63,10 +64,12 @@ class CalculatedTime extends React.Component {
   render() {
     this.calculateTimesFromInput();
     return (
-      <div>
-        <h4>Time Converted:</h4>
-          <DisplayCalcTime1 timezone={this.props.timezones[0]} userNum={1} time={this.props.calculatedMoments[0].format('hh:mm A')}/>
-          <DisplayCalcTime1 timezone={this.props.timezones[1]} userNum={2} time={this.props.calculatedMoments[1].format('hh:mm A')}/>
+      <div className={styles.calculations}>
+          <h3>Calculated Time:</h3>
+        <div className={styles.calcColumns}>
+            <DisplayCalcTime1 timezone={this.props.timezones[0]} userNum={1} time={this.props.calculatedMoments[0].format('hh:mm A')}/>
+            <DisplayCalcTime1 timezone={this.props.timezones[1]} userNum={2} time={this.props.calculatedMoments[1].format('hh:mm A')}/>
+        </div>
           <SaveBtn timezones={this.props.timezones} times={[this.props.calculatedMoments[0].format('hh:mm A'), this.props.calculatedMoments[1].format('hh:mm A')]}/>
       </div>
     );

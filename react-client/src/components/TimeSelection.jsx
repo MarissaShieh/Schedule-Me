@@ -37,7 +37,7 @@ class TimeSelection extends React.Component {
     const clockArr = this.make24HourClock();
     return (
       <div className={styles.selected}>
-        <label htmlFor="timeSelection">Choose a time which works for Person {this.props.userNum}: </label>
+        <label htmlFor="timeSelection">Time: </label>
         <select id="timeSelection" onChange={this.handleSelection} value={this.state.value}> 
           {clockArr.map(time => <option key={time} value={time}>{time}</option>)}
         </select>
