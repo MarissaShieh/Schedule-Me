@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './User.jsx';
 import CalculatedTime from './CalculatedTime';
+import moment from 'moment';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
       selectedTime1: '',
       selectedTime2: '02:00',
       selectedNotCalculated: true,
-      calculatedMoments: []
+      calculatedMoments: [moment(), moment()]
     }
     this.selectTimezone = this.selectTimezone.bind(this);
     this.selectTime = this.selectTime.bind(this);

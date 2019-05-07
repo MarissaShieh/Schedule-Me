@@ -3,7 +3,7 @@ import DisplayCalcTime1 from './DisplayCalcTime1.jsx'
 import moment from 'moment-timezone';
 
 function CalculatedTime (props) {
-  let DisplayTime;
+  // let DisplayTime;
   if (props.notCalculatedYet) {
     let selectedUser;
     let otherUser;
@@ -40,19 +40,23 @@ function CalculatedTime (props) {
       calculatedTimes[0] = calcOtherUserTime;
       calculatedTimes[1] = inputUserTime;
     }
+    console.log('right above props.finalCalculations');
     props.finalCalculations(calculatedTimes);
-  } else {
-    DisplayTime = (
-      <div>
-        <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} time={props.calculatedMoments[0].format('hh:mm A')}/>
-        <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} time={props.calculatedMoments[1].format('hh:mm A')}/>
-      </div>
-    )
-  }
+  } 
+  // else {
+  //   DisplayTime = (
+  //     <div>
+  //       <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} time={props.calculatedMoments[0].format('hh:mm A')}/>
+  //       <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} time={props.calculatedMoments[1].format('hh:mm A')}/>
+  //     </div>
+  //   )
+  // }
+  console.log('in CalculatedTime');
   return (
     <div>
       <h4>Time Converted:</h4>
-      {DisplayTime}
+        <DisplayCalcTime1 timezone={props.timezones[0]} userNum={1} time={props.calculatedMoments[0].format('hh:mm A')}/>
+        <DisplayCalcTime1 timezone={props.timezones[1]} userNum={2} time={props.calculatedMoments[1].format('hh:mm A')}/>
     </div>
   );
 }
