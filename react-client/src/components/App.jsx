@@ -2,6 +2,7 @@ import React from 'react';
 import User from './User.jsx';
 import CalculatedTime from './CalculatedTime';
 import moment from 'moment';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,21 @@ class App extends React.Component {
     this.selectTimezone = this.selectTimezone.bind(this);
     this.selectTime = this.selectTime.bind(this);
     this.finalCalculations = this.finalCalculations.bind(this);
+  }
+
+  componentDidMount() {
+    if (document.cookie) {
+      $.ajax({
+        type: 'GET',
+        url: '/searches',
+        data: {
+          cookieID: document.cookie,
+        }
+      })
+        .done((pastSearches) => {console.log(pastSearches)})
+        .catch(() => console.log('failed to receive data from database'));
+
+    }
   }
 
   selectTimezone(timezone, userNum) {

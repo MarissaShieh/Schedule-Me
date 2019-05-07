@@ -8,7 +8,7 @@ function SaveBtn(props) {
   function saveToDatabase() {
     if (!document.cookie) {
       var dateNow = new Date();
-      var newDateObj = moment.utc(dateNow).add(1, 'm');
+      var newDateObj = moment.utc(dateNow).add(10, 'm');
       var generatedUsername = `${Math.ceil(Math.random() * 100000) + Math.floor(Math.random() * 5000)}`
       document.cookie = `username=${generatedUsername};expires=${newDateObj}`
     }
