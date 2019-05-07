@@ -22,6 +22,8 @@ class App extends React.Component {
     this.selectTimezone = this.selectTimezone.bind(this);
     this.selectTime = this.selectTime.bind(this);
     this.finalCalculations = this.finalCalculations.bind(this);
+    this.clearHistory = this.clearHistory.bind(this);
+    this.newlySaved = this.newlySaved.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +48,8 @@ class App extends React.Component {
   selectTimezone(timezone, userNum) {
     const whichTZ = `timezone${userNum}`;
     this.setState({
-      [whichTZ]: timezone
+      [whichTZ]: timezone,
+      selectedNotCalculated: true
     });
   }
 
@@ -74,11 +77,26 @@ class App extends React.Component {
     })
   }
 
+  clearHistory() {
+    this.setState({
+      pastSavedSearches: []
+    });
+  }
+
+  newlySaved(newSearch){
+    let pastSearches = this.state.pastSavedSearches;
+    pastSearches.unshift(newSearch);
+    this.setState({
+      pastSavedSearches: pastSearches,
+    })
+  }
+
   render () {
     let pastSearches;
     if (this.state.pastSavedSearches.length > 0) {
-      pastSearches = <PastSearches pastSearches={this.state.pastSavedSearches}/>;
+      pastSearches = <PastSearches pastSearches={this.state.pastSavedSearches} clearHistory={this.clearHistory}/>;
     }
+
     return (
       <div className={styles.app}>
         <h1>Time Zone Converter</h1>
@@ -86,8 +104,10 @@ class App extends React.Component {
         <div className={styles.users}>
           {this.state.users.map(user => <User key={user.toString()} selectTime={this.selectTime} selectTimezone={this.selectTimezone} userNum={user.toString()} selectedTime={this.state[`selectedTime${user}`]} timezone={this.state[`timezone${user}`]}/>)}
         </div>
-        <CalculatedTime users={this.state.users} timezones={[this.state.timezone1, this.state.timezone2]} selectedTimes={[this.state.selectedTime1, this.state.selectedTime2]} notCalculatedYet={this.state.selectedNotCalculated} finalCalculations={this.finalCalculations} calculatedMoments={this.state.calculatedMoments}/>
-        {pastSearches}
+        <CalculatedTime users={this.state.users} timezones={[this.state.timezone1, this.state.timezone2]} selectedTimes={[this.state.selectedTime1, this.state.selectedTime2]} notCalculatedYet={this.state.selectedNotCalculated} finalCalculations={this.finalCalculations} calculatedMoments={this.state.calculatedMoments} newlySaved={this.newlySaved}/>
+        <div>
+          {pastSearches}
+        </div>
       </div>
     );
   }

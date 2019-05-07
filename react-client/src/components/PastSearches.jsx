@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './PastSearches.module.css';
+import ClearBtn from './ClearBtn.jsx'
 
 function PastSearches(props) {
   return (
     <div className={styles.pastSearchesBox}>
     <hr />
-    <h3>Past Searches: </h3>
+    <div className={styles.titleAndClearBtn}>
+      <h3>Past Searches: </h3>
+      <ClearBtn clearHistory={props.clearHistory} />
+    </div>
       {props.pastSearches.map( (search, i) => {
         return (
           <div key={i} className={styles.eachPastSearch}>

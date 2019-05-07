@@ -70,7 +70,7 @@ class CalculatedTime extends React.Component {
             <DisplayCalcTime1 timezone={this.props.timezones[0]} userNum={1} time={this.props.calculatedMoments[0].format('hh:mm A')}/>
             <DisplayCalcTime1 timezone={this.props.timezones[1]} userNum={2} time={this.props.calculatedMoments[1].format('hh:mm A')}/>
         </div>
-          <SaveBtn timezones={this.props.timezones} times={[this.props.calculatedMoments[0].format('hh:mm A'), this.props.calculatedMoments[1].format('hh:mm A')]}/>
+          <SaveBtn timezones={this.props.timezones} times={[this.props.calculatedMoments[0].format('hh:mm A'), this.props.calculatedMoments[1].format('hh:mm A')]} newlySaved={this.props.newlySaved}/>
       </div>
     );
   }

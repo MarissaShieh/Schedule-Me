@@ -13,12 +13,14 @@ class SaveBtn extends React.Component {
   }
   
   saveToDatabase() {
+    var timeToSave = 30;
     if (!document.cookie) {
       var dateNow = new Date();
-      var newDateObj = moment.utc(dateNow).add(30, 'm');
-      var generatedUsername = `${Math.ceil(Math.random() * 100000) + Math.floor(Math.random() * 5000)}`
+      var newDateObj = moment.utc(dateNow).add(timeToSave, 'm');
+      var generatedUsername = `${Math.ceil(Math.random() * 100000) + Math.floor(Math.random() * 5000)}`;
       document.cookie = `username=${generatedUsername};expires=${newDateObj}`
     }
+    
     $.ajax({
       type: 'POST',
       url: '/searches',
@@ -30,7 +32,10 @@ class SaveBtn extends React.Component {
       // contentType: 'application/json'
     })
       .done(() => {
-        this.setState({saved: "Search saved to database for 30 minutes"});
+        this.setState({
+          saved: `Search saved to database for ${timeToSave} minutes`
+        });
+        this.props.newlySaved({timezones: this.props.timezones, times: this.props.times});
       })
       .fail(() => console.log('failed to save to database'))
     
