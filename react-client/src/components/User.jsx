@@ -5,8 +5,8 @@ import TimeSelection from './TimeSelection.jsx';
 const User = function(props){
   return (
     <div className={`user user${props.userNum}`}>
-      <TimezoneDropdown userNum={props.userNum} selectTimezone={props.selectTimezone}/>
-      <TimeSelection userNum={props.userNum} selectTime={props.selectTime}/>
+      <TimezoneDropdown userNum={props.userNum} selectTimezone={props.selectTimezone} timezone={props.timezone}/>
+      <TimeSelection selectedTime={props.selectedTime} userNum={props.userNum} selectTime={props.selectTime}/>
     </div>
   )
 }
