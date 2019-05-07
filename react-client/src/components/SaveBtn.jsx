@@ -11,6 +11,12 @@ class SaveBtn extends React.Component {
     }
     this.saveToDatabase = this.saveToDatabase.bind(this);
   }
+
+  componentDidUpdate(){
+    if (this.state.saved !== this.props.savedMessage) {
+      this.setState({saved: this.props.savedMessage});
+    }
+  }
   
   saveToDatabase() {
     var timeToSave = 30;
@@ -35,7 +41,7 @@ class SaveBtn extends React.Component {
         this.setState({
           saved: `Search saved to database for ${timeToSave} minutes`
         });
-        this.props.newlySaved({timezones: this.props.timezones, times: this.props.times});
+        this.props.newlySaved({timezones: this.props.timezones, times: this.props.times}, `Search saved to database for ${timeToSave} minutes`);
       })
       .fail(() => console.log('failed to save to database'))
     
