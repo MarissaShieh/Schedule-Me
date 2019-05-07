@@ -5,3 +5,9 @@
 .eachPastSearch{
   padding: 1em;
 }
+
+.titleAndClearBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

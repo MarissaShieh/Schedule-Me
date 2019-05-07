@@ -28,7 +28,6 @@ var selectAll = function(cookieID, callback) {
     if(err) {
       callback(err, null);
     } else {
-      console.log('pastSearches', pastSearches);
       callback(null, pastSearches);
     }
   });
@@ -49,5 +48,16 @@ var postSearch = function(data, callback) {
   })
 }
 
+var deleteSearches = function(cookieID, callback) {
+  Search.deleteMany({cookieID: cookieID}, function(err, deleted) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, deleted);
+    }
+  });
+}
+
 module.exports.selectAll = selectAll;
 module.exports.postSearch = postSearch;
+module.exports.deleteSearches = deleteSearches;
