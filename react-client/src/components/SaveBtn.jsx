@@ -3,7 +3,6 @@ import moment from 'moment';
 import $ from 'jquery';
 
 function SaveBtn(props) {
-  console.log(props);
 
   function saveToDatabase() {
     if (!document.cookie) {

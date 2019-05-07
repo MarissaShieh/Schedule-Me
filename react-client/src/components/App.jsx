@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './User.jsx';
-import CalculatedTime from './CalculatedTime';
+import CalculatedTime from './CalculatedTime.jsx';
+import PastSearches from './PastSearches.jsx'
 import moment from 'moment';
 import $ from 'jquery';
 
@@ -14,7 +15,8 @@ class App extends React.Component {
       selectedTime1: '',
       selectedTime2: '02:00',
       selectedNotCalculated: true,
-      calculatedMoments: [moment(), moment()]
+      calculatedMoments: [moment(), moment()],
+      pastSavedSearches: []
     }
     this.selectTimezone = this.selectTimezone.bind(this);
     this.selectTime = this.selectTime.bind(this);
@@ -30,7 +32,11 @@ class App extends React.Component {
           cookieID: document.cookie,
         }
       })
-        .done((pastSearches) => {console.log(pastSearches)})
+        .done((pastSearches) => {
+          this.setState({
+            pastSavedSearches: pastSearches
+          });
+        })
         .catch(() => console.log('failed to receive data from database'));
 
     }
@@ -68,10 +74,15 @@ class App extends React.Component {
   }
 
   render () {
+    let pastSearches;
+    if (this.state.pastSavedSearches.length > 0) {
+      pastSearches = <PastSearches pastSearches={this.state.pastSavedSearches}/>;
+    }
     return (
       <div>
         {this.state.users.map(user => <User key={user.toString()} selectTime={this.selectTime} selectTimezone={this.selectTimezone} userNum={user.toString()} selectedTime={this.state[`selectedTime${user}`]} timezone={this.state[`timezone${user}`]}/>)}
         <CalculatedTime users={this.state.users} timezones={[this.state.timezone1, this.state.timezone2]} selectedTimes={[this.state.selectedTime1, this.state.selectedTime2]} notCalculatedYet={this.state.selectedNotCalculated} finalCalculations={this.finalCalculations} calculatedMoments={this.state.calculatedMoments}/>
+        {pastSearches}
       </div>
     );
   }
