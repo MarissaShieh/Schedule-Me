@@ -8,7 +8,7 @@ function PastSearches(props) {
     <hr />
     <div className={styles.titleAndClearBtn}>
       <h3>Past Searches: </h3>
-      <ClearBtn clearHistory={props.clearHistory} />
+      <ClearBtn clearHistory={props.clearHistory}/>
     </div>
       {props.pastSearches.map( (search, i) => {
         return (

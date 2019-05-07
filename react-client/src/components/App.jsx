@@ -82,7 +82,8 @@ class App extends React.Component {
 
   clearHistory() {
     this.setState({
-      pastSavedSearches: []
+      pastSavedSearches: [],
+      savedMessage: ''
     });
   }
 
