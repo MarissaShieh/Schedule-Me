@@ -32,7 +32,10 @@ class SaveBtn extends React.Component {
       // contentType: 'application/json'
     })
       .done(() => {
-        this.setState({saved: `Search saved to database for ${timeToSave} minutes`});
+        this.setState({
+          saved: `Search saved to database for ${timeToSave} minutes`
+        });
+        this.props.newlySaved({timezones: this.props.timezones, times: this.props.times});
       })
       .fail(() => console.log('failed to save to database'))
     
