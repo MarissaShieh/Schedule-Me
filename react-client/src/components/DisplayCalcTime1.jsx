@@ -6,7 +6,7 @@ function DisplayCalcTime1 (props) {
   return (
     <div className={styles.box}> <h4>Person {props.userNum}: </h4>
       <div>Time Zone: {props.timezone}</div>
-      <div>Time: {time}</div>
+      <div className={styles.time}>Time: {time}</div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ function PastSearches(props) {
     <h3>Past Searches: </h3>
       {props.pastSearches.map( (search, i) => {
         return (
-          <div key={i}>
+          <div key={i} className={styles.eachPastSearch}>
             <b>Search {i+1}.</b>
             <div>
               <em>Person 1: </em>

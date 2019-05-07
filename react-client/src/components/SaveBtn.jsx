@@ -1,10 +1,18 @@
 import React from 'react';
 import moment from 'moment';
 import $ from 'jquery';
+import styles from './SaveBtn.module.css';
 
-function SaveBtn(props) {
-  let saved;
-  function saveToDatabase() {
+class SaveBtn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      saved: ''
+    }
+    this.saveToDatabase = this.saveToDatabase.bind(this);
+  }
+  
+  saveToDatabase() {
     if (!document.cookie) {
       var dateNow = new Date();
       var newDateObj = moment.utc(dateNow).add(30, 'm');
@@ -16,27 +24,30 @@ function SaveBtn(props) {
       url: '/searches',
       data: {
         cookieID: document.cookie,
-        timezones: props.timezones,
-        times: props.times
+        timezones: this.props.timezones,
+        times: this.props.times
       },
       // contentType: 'application/json'
     })
       .done(() => {
-        console.log('saved to database'); 
-        saved = "Search saved to database for 30 minutes"
+        this.setState({saved: "Search saved to database for 30 minutes"});
       })
       .fail(() => console.log('failed to save to database'))
     
   }
 
-  return (
-    <div>
-      <button onClick={saveToDatabase}>
-        Save search
-      </button>
-      {saved}
-    </div>
-  )
+  render() {
+    return (
+      <div className={styles.savedBtnBox}>
+        <button onClick={this.saveToDatabase}>
+          Save search
+        </button>
+        <div className={styles.savedAlert}>
+          {this.state.saved}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default SaveBtn;
