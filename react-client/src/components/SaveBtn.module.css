@@ -1,0 +1,12 @@
+.savedBtnBox{
+  display: flex;
+  flex-direction: column;
+}
+
+.savedAlert{
+  color: purple;
+}
+
+button{
+  margin-top: 1em;
+}

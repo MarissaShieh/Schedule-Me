@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/searches', { useNewUrlParser: true });
 
 var db = mongoose.connection;
 
@@ -11,21 +11,43 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var searchSchema = mongoose.Schema({
+  cookieID: String,
+  timezones: [{
+    type: String
+  }],
+  times: [{
+    type: String
+  }]
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Search = mongoose.model('Searches', searchSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+var selectAll = function(cookieID, callback) {
+  Search.find({cookieID: cookieID}, function(err, pastSearches) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      console.log('pastSearches', pastSearches);
+      callback(null, pastSearches);
     }
   });
 };
 
+var postSearch = function(data, callback) {
+  var newSearch = new Search({
+    cookieID: data.cookieID,
+    times: data.times,
+    timezones: data.timezones
+  });
+  newSearch.save((err, savedSearch) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, savedSearch);
+    }
+  })
+}
+
 module.exports.selectAll = selectAll;
+module.exports.postSearch = postSearch;
