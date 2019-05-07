@@ -7,10 +7,17 @@ class TimeSelection extends React.Component {
     this.state = {
       value: this.props.selectedTime
     }
-    // console.log('Time select userNum', this.props.userNum);
     this.handleSelection = this.handleSelection.bind(this);
   };
-  
+
+  componentDidUpdate() {
+    if (this.state.value !== this.props.selectedTime) {
+      this.setState({
+        value: this.props.selectedTime
+      });
+    }
+  }  
+
   handleSelection(event){
     const value = event.target.value;
     this.setState({
