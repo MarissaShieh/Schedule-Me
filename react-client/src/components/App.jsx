@@ -46,7 +46,8 @@ class App extends React.Component {
   selectTimezone(timezone, userNum) {
     const whichTZ = `timezone${userNum}`;
     this.setState({
-      [whichTZ]: timezone
+      [whichTZ]: timezone,
+      selectedNotCalculated: true
     });
   }
 
