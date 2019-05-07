@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment-timezone';
+import styles from './TimezoneDropdown.module.css'
 
 class TimezoneDropdown extends React.Component {
   constructor(props) {
@@ -11,6 +12,9 @@ class TimezoneDropdown extends React.Component {
   }
 
   handleSelection(event) {
+    this.setState({
+      value: event.target.value
+    });
     this.props.selectTimezone(event.target.value, this.props.userNum);
   }
 
@@ -18,7 +22,8 @@ class TimezoneDropdown extends React.Component {
     const allTimezones = moment.tz.names();
     return (
       <div>
-        <label htmlFor="timezone-dropdown">Choose the time zone of Person {this.props.userNum}: </label>
+        <h4>Person {this.props.userNum}</h4> 
+        <label htmlFor="timezone-dropdown">Time zone: </label>
         <select id="timezone-dropdown" onChange={this.handleSelection} value={this.state.value}>  
           {allTimezones.map(timezone => <option value={timezone} key={timezone}>{timezone}</option>)}
         </select>
