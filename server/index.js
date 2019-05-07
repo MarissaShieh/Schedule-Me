@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.get('/searches', function (req, res) {
-  console.log(req.query.cookieID);
   selectAll(req.query.cookieID, (err, foundSearches) => {
     if (err) {
       res.sendStatus(500);
