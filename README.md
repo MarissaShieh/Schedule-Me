@@ -20,3 +20,5 @@ npm install -g webpack
 npm install  
 npm run build  
 npm run start-dev  
+
+On your browser, go to localhost:3000 or 127.0.0.1:3000 to use Schedule Me.
