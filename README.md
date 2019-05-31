@@ -16,7 +16,7 @@ Allow users to find the ideal time to communicate with someone in a different ti
 1. An American journalist wants to schedule a call with a Thai researcher. The Thai source says they're available at 11 AM their time. What time will it be for the American journalist?
 
 # To set up:
-npm install -g webpack
-npm install
-npm run build
-npm run start-dev
+npm install -g webpack\n
+npm install\n
+npm run build\n
+npm run start-dev\n
